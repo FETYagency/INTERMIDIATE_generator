@@ -1,0 +1,13 @@
+:root{
+    --FF: 'jetbrains_monoregular';
+    --FS-L: toRem(32)
+    --LH-L: toRem(43)
+
+    --FS-M:toRem(24)
+    --LH-M:toRem(31)
+
+    --FS-B:toRem(18)
+    --LH-B:toRem(32)
+
+    font-size: 16px;
+}

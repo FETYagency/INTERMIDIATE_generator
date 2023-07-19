@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="font/stylesheet.css">
+  <link rel="stylesheet" href="styles/styles.css">
+  
+  <title>Frontend Mentor | Password generator app</title>
+</head>
+<body>
+
+  <main class="generatorContainer">
+
+    <div class="code">
+      <input type="text" class="generated" disabled placeholder="P4$5W0rD!">
+      <div class="copyBtn">
+        <img src="assets/images/icon-copy.svg" alt="">
+      </div>
+    </div>
+
+    <div class="options">
+      
+      <div class="slider">
+        <div class="sliderHeader">
+          <p class="title">Character Length</p>
+          <div class="boldNumber">?</div>
+        </div>
+        <input type="range" step="5" max="20" min="0">
+      </div>
+
+      <ul class="codeContent">
+        <li>
+          <label for="upper">
+            <input type="checkbox" id="upper">
+            <span class="costumeCheckbox"></span>
+          </label>
+          <p>Include Uppercase Letters</p>
+        </li>
+
+        <li>
+          <label for="lowwer">
+            <input type="checkbox" id="lowwer">
+            <span class="costumeCheckbox"></span>
+          </label>
+          <p>Include Lowercase Letters</p>
+        </li>
+
+        <li>
+          <label for="num">
+            <input type="checkbox" id="num">
+            <span class="costumeCheckbox"></span>
+          </label>
+          <p>Include Numbers</p>
+        </li>
+
+        <li>
+          <label for="sym">
+            <input type="checkbox" id="sym">
+            <span class="costumeCheckbox"></span>
+          </label>
+          <p>Include Symbols</p>
+        </li>
+      </ul>
+      
+      <div class="strength">
+  
+        <h2>STRENGTH</h2>
+  
+        <div class="result">
+          <div class="strengthLevel">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+  
+          <div class="bars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      <button class="generate">
+        GENERATE
+        <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z"/></svg>
+      </button>
+      
+    </div>
+
+  </main>
+
+  <script src="scripts/app.js"></script>
+</body>
+</html>

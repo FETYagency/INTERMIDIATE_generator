@@ -1,0 +1,336 @@
+@use "sass:math";
+@import url(reset.css);
+@function toRem($unit, $rem: 16){
+    @return math.div($unit, $rem) * 1rem
+};  
+:root{
+    --FF: 'jetbrains_monoregular';
+    --FS-L:  #{toRem(32)};
+    --LH-L:  #{toRem(43)};
+
+    --FS-M: #{toRem(24)};
+    --LH-M: #{toRem(31)};
+
+    --FS-B: #{toRem(18)};
+    --LH-B: #{toRem(32)};
+
+    font-size: 16px;
+
+    --range_side: 50%;
+}
+
+body{
+    block-size: 100dvb;
+    background-color: #18171F;
+    color: #E6E5EA;
+
+    font-family: var(--FF);
+    
+    display: grid;
+    place-items: center;
+}
+
+.generatorContainer{
+    user-select: none;  
+    
+    display: flex;
+    flex-direction: column;
+    gap: toRem(24);
+    inline-size: min(toRem(540), 95%);
+    >*{
+        background-color: #24232C;
+    }
+    >.code{
+        display: flex;
+        justify-content: space-between;
+        inline-size: 100%;
+
+        >input{
+            user-select: none;
+            flex: 0 1 auto;
+            background-color: transparent;
+            border: none;
+            padding-inline-start: toRem(32);
+            color: #E6E5EA;
+            opacity: 1;
+            font-size:  var(--FS-L);
+            line-height: normal;
+            text-overflow:ellipsis;
+            max-inline-size: toRem(400);
+            inline-size: 100%;
+        }
+        >.copyBtn{
+            inline-size: toRem(64);
+            padding-block: toRem(28);
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            >img{
+                inline-size: 28px;
+            }
+            &::after{
+                content: "COPIED!";
+                color: #A4FFAF;
+                position: absolute;
+                inset-inline: -100% auto;
+                inset-block: 50% auto;
+                transform: translateY(-50%);
+                display: none;
+            }
+            &.clicked::after{
+                display: block;
+            }
+        }
+    }
+    // the begining of the slider block (nest)
+    >.options{
+        padding-inline: toRem(32);
+        padding-block: toRem(24);
+
+        display: flex;
+        flex-direction: column;
+        gap: toRem(32);
+        
+        >.slider{
+            display: flex;
+            flex-flow: column nowrap;
+            gap: 1rem;
+            inline-size: 100%;
+            // the header styling
+            >.sliderHeader{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                >.title{
+                    font-size: var(--FS-B);
+                    line-height: var(--LH-B);
+                }
+                >.boldNumber{
+                    color: #A4FFAF;
+                    font-size: var(--FS-L);
+                    font-size: var(--LH-L);
+    
+                    inline-size: toRem(50);
+                    block-size: toRem(50);
+                    display: grid;
+                    place-items: center;
+                }
+            }
+            // the slider styling
+            >[type="range"]{
+                -webkit-appearance: none;
+                appearance: none;
+                background: transparent;
+                cursor: pointer;
+                inline-size: 100%;
+    
+                            /***** Track Styles *****/
+    
+                /***** Chrome, Safari, Opera, and Edge Chromium *****/
+                &::-webkit-slider-runnable-track {
+                    background: linear-gradient(90deg, rgba(164,255,175,1) var(--range_side), rgba(24,23,31,1) var(--range_side)) no-repeat;
+                    height: 0.5rem;
+                }
+                
+                /******** Firefox ********/
+                &::-moz-range-track {
+                    background: linear-gradient(90deg, rgba(164,255,175,1) var(--range_side), rgba(24,23,31,1) var(--range_side)) no-repeat;
+                    height: 0.5rem;
+                }
+    
+                            /***** Thumb Styles *****/
+                /***** Chrome, Safari, Opera, and Edge Chromium *****/
+                &::-webkit-slider-thumb {
+                    -webkit-appearance: none; /* Override default look */
+                    appearance: none;
+                    border-radius: 50%; /*Removes default border-radius that FF applies*/
+                    background-color: #E6E5EA;
+                    border: 0px solid transparent;
+                    inline-size: toRem(28);
+                    block-size: toRem(28);
+                    margin-block-start: calc((.5rem / 2) - (toRem(28) / 2));
+                }
+                /***** Firefox *****/
+                &::-moz-range-thumb {
+                    border-radius: 50%; /*Removes default border-radius that FF applies*/
+                    background-color: #E6E5EA;
+                    border: 0px solid transparent;
+                    inline-size: toRem(28);
+                    block-size: toRem(28);
+                }
+    
+                &:focus {
+                    outline: none;
+                }
+                  
+                /***** Chrome, Safari, Opera, and Edge Chromium *****/
+                &:active::-webkit-slider-thumb {
+                    border: 2px solid #A4FFAF;
+                    background-color: #18171F;
+                }
+                
+                /******** Firefox ********/
+                &:active::-moz-range-thumb {
+                    background-color: #18171F;
+                    border: 2px solid #A4FFAF;
+                }
+            }
+        }
+        // the begining of the slider block (nest)
+        >.codeContent{
+            display: flex;
+            flex-direction: column;
+            gap: toRem(19);
+            >li{
+                display: flex;
+                align-items: center;
+                gap: toRem(24);
+                >label{
+                    display: inline-block;
+                    inline-size: toRem(20);
+                    aspect-ratio: 1;
+                    cursor: pointer;
+                    background-color: #24232C;
+                    position: relative;
+                    >input{
+                        opacity: 0;
+                        &:checked{
+                            +span{
+                                color: #A4FFAF;
+                                border: 2px solid currentColor;
+                                background-color: currentColor;
+                                &::after{
+                                    display: block;
+                                }
+                            }
+                        }
+                    }
+                    >span{
+                        inline-size: 100%;
+                        block-size: 100%;
+                        border: 2px solid #E6E5EA;
+                        position: absolute;
+                        inset-inline: 0 auto;
+                        inset-block: 0 auto;
+                        &::after{
+                            content: url(../assets/images/icon-check.svg);
+                            position: absolute;
+                            inset-inline: 50% auto;
+                            inset-block: 58% auto;
+                            transform: translate(-50%, -50%);
+                            display: none;
+                        }
+                    }
+                }
+                >p{
+                    font-size: var(--FS-B);
+                    line-height: var(--LH-B);
+                }
+            }
+        }
+        // end of the code content section
+        >.strength{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+            background-color: #18171F;
+            padding-block: toRem(22);
+            padding-inline: toRem(32);
+            >h2{
+                font-size: var(--FS-B);
+                line-height: var(--LH-B);
+            }
+            >.result{
+                display: flex;
+                align-items: center;
+                gap: toRem(15.5);
+                >.strengthLevel{
+                    text-transform: uppercase;
+                    font-size: var(--FS-M);
+                    line-height: var(--LH-M) ;
+
+                    &.thinking{
+                        >span{
+                            &:first-child{
+                                animation: thinking .4s ease-in forwards;
+                            }
+                            &:nth-child(2){
+                                animation: thinking  .4s ease-in forwards;
+                            }   
+                            &:last-child{
+                                animation: thinking  .4s ease-in forwards;
+                            }
+                        }
+                    }
+                    >span{
+                        // @media(width<400px){
+                        //     display: none;
+                        // }
+                        display: inline-block;
+                        inline-size: toRem(10);
+                        aspect-ratio: 1;
+                        border-radius: 50%;
+                        background-color: #E6E5EA;
+                        &:first-child{
+                            animation: 1s bounce1 0s infinite ease-in alternate;
+                        }
+                        &:nth-child(2){
+                            animation: 1s bounce1  .2s infinite ease-in alternate;
+                        }   
+                        &:last-child{
+                            animation: 1s bounce1  .4s infinite ease-in alternate;
+                        }
+                    }
+                }
+                >.bars{
+                    block-size: toRem(28);
+                    >span{
+                        display: inline-block;
+                        block-size: 100%;
+                        inline-size: toRem(10);
+                        color: #E6E5EA;
+                        background-color: transparent;
+                        border: 2px solid currentColor;
+                    }
+                }
+            }
+        }
+
+        >button{
+            block-size: toRem(65);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: toRem(24);
+            background-color: #A4FFAF;
+            border: none;
+            cursor: pointer;
+
+            font-family: inherit;
+            font-size: var(--FS-B);
+            line-height: var(--LH-B);
+            font-weight: 700;
+            &:hover{
+                background-color: transparent;
+                color:  #A4FFAF;
+                border: 2px solid currentColor;
+            }
+        }
+        
+    }
+}
+
+@keyframes bounce1 {
+    to{
+        transform: translateY(-10px);
+    }
+}
+@keyframes thinking {
+    to{
+        transform: translateY(-12px);
+    }
+}
